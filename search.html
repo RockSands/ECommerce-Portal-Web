@@ -263,8 +263,8 @@
                     </ul>
                     <div><span>共{{totalPage}}页&nbsp;</span><span>
       到第
-      <input type="text" class="page-num">
-      页 <button class="page-confirm" onclick="alert(1)">确定</button></span></div>
+      <input type="text" class="page-num" v-model="jumpto" type="Number" >
+      页 <button class="page-confirm" @click="jumptoPage()" >确定</button></span></div>
                 </div>
             </div>
         </div>
@@ -361,6 +361,7 @@
     var vm = new Vue({
         el: "#searchApp",
         data: {
+            ly, //合并
             // 搜索的条件
             search:{
                 key:"",     // 输入的搜索条件
@@ -375,7 +376,7 @@
             filters:[],     // 过滤条件数组
             show:false,     // 控制规格参数过滤的显示
             breads:[],      // 分类面包屑的内容
-            ly
+            jumpto: "",
         },
 
         components:{
@@ -485,7 +486,21 @@
                 if (this.search.page < this.totalPage) {
                     this.search.page++;
                 }
-            }
+            },
+            jumptoPage(){
+                if(!this.jumpto){
+                    return;
+                }
+                if(!/^\d+$/.test(this.jumpto)){
+                    alert("非法数字");
+                    return;
+                }
+                if(this.jumpto < 1 || this.jumpto > this.totalPage){
+                    alert("非法数字");
+                    return;
+                }
+                this.search.page = this.jumpto;
+            },
         },
 
         watch:{
