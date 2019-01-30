@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-    <title>乐优商城--购物车页面</title>
+    <title>电子商城--购物车页面</title>
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css"/>
     <link rel="stylesheet" type="text/css" href="css/pages-cart.css"/>
@@ -346,7 +346,7 @@
                     const localCarts = ly.store.get("carts");
                     // 如果本地存有购物车信息，则发送至后台保存，然后删除本地的
                     if (localCarts) {
-                        ly.http.post("/cart/addLocal", localCarts)
+                        ly.http.post("/cart", localCarts)
                             .then(() => {
                                 ly.store.del("carts");
                                 this.getCartList();
@@ -360,14 +360,12 @@
                     this.carts = ly.store.get("carts") || [];
                     // 当页面加载好后，默认全选商品
                     this.selected = this.carts;
-
-
                 })
             },
 
             getCartList(){
                 // 去后台redis中查询购物车信息
-                ly.http.get("/cart").then(({data}) => {
+                ly.http.get("/cart/list").then(({data}) => {
                     this.carts = data || [];
                     this.selectAll = true;
                 }).catch(() => {
