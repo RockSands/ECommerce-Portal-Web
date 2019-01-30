@@ -394,7 +394,6 @@
                     });
 				},
 
-
                 // 先判断是否登陆
                 loadOrders(){
 					ly.verifyUser().then(() => {
@@ -500,7 +499,6 @@
                             }).catch(() => {
                                 location.href = "/login.html?returnUrl=" + location.href;
                             })
-
                         } else {
                             console.log('error submit!!');
                             return false;

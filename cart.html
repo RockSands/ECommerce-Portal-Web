@@ -134,6 +134,7 @@
                 <el-alert title="已删除商品，您可以重新购买或加关注：" type="warning" :closable="false" center show-icon></el-alert>
                 <div class="cart-list del">
                     <ul class="goods-list yui3-g" v-for="(c,i) in deleted" :key="c.skuId">
+                        <div class="item-img"><img :src="cart.image" width="80px" height="80px"/></div>
                         <li class="yui3-u-1-2">
                             <div class="good-item">
                                 <div class="item-msg" v-text="c.title"></div>
@@ -487,14 +488,14 @@
         },
 
         computed:{
-            // 计算没被下架的商品
+            // 计算没被下架的商品--> 后台未支持,不进行过滤
             enableCarts(){
-                return this.carts.filter(c => c.enable);
+                return this.carts.filter(c => !c.enable);
             },
 
             // 计算被下架的商品
             unenableCarts(){
-                return this.carts.filter(c => !c.enable)
+                return this.carts.filter(c => c.enable)
             },
 
             // 计算总价
