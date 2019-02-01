@@ -547,6 +547,12 @@ const ly = ecommerce = {
      * 发起ajax请求工具，底层依然是axios
      */
     http: axios,
+
+    /*
+     * localStorage,是每个浏览器都有的本地存储,适合存储当前的存储信息
+     * 改存储时长永久,
+     * 除localStorage,一般浏览器还提供session存储,但是session存储存在时长,不适合长时间存储信息
+     */
     store: {
         set(key, value) {
             localStorage.setItem(key, JSON.stringify(value));

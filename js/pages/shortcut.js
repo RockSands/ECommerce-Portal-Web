@@ -4,8 +4,8 @@ const shortcut = {
         <div class='shortcut'> \
             <ul class='fl'> \
                <li class='f-item'>乐优欢迎您！</li> \
-               <li class='f-item' v-if='user && user.username'>\
-               尊敬的会员，<span style='color: red;'>{{user.username}}</span>\
+               <li class='f-item' v-if='user && user.name'>\
+               尊敬的会员，<span style='color: red;'>{{user.name}}</span>\
                &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' @click='outLogin'>退出登陆</a>\
                </li>\
                <li v-else class='f-item'> \
@@ -60,7 +60,7 @@ const shortcut = {
         // 退出登陆
         outLogin(){
             const filter = ["getOrderInfo","home-index","pay","payfail","paysuccess"];
-            ly.http.delete("/auth").then(() => {
+            ly.http.get("/auth/logout").then(() => {
                 this.user = null;
                 const start = window.location.href.split(".com/")[1].split(".")[0];
                 const returnUrl = window.location.href.split(".com/")[1];
